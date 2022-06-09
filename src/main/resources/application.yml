@@ -1,2 +1,13 @@
 server:
   port: 8084
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5436/chat-db
+    username: postgres
+    password: 12345
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect

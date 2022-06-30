@@ -22,5 +22,6 @@ public class Chat extends BaseEntity {
     private Set<Account> accounts;
 
     @OneToMany
-    private Message messages;
+    @JoinColumn(name = "chat_id")
+    private Set<Message> messages;
 }

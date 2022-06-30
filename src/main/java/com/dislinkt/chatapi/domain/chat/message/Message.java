@@ -16,7 +16,7 @@ public class Message extends BaseEntity {
     @Size(max = 256)
     private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "from_id", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "from_id", referencedColumnName = "id", nullable = false)
     private Account from;
 }

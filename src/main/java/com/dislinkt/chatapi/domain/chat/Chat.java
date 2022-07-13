@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 public class Chat extends BaseEntity {
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "chat_accounts",
             uniqueConstraints = @UniqueConstraint(name = "UniqueChatAccount",
@@ -21,7 +21,6 @@ public class Chat extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "account_id"))
     private Set<Account> accounts;
 
-    @OneToMany
-    @JoinColumn(name = "chat_id")
+    @OneToMany(mappedBy = "chat", fetch = FetchType.LAZY)
     private Set<Message> messages;
 }

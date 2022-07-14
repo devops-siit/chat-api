@@ -1,14 +1,17 @@
 package com.dislinkt.chatapi.domain.account;
 
 import com.dislinkt.chatapi.domain.base.BaseEntity;
-import lombok.Data;
+import com.dislinkt.chatapi.domain.chat.Chat;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Account extends BaseEntity {
 
@@ -20,4 +23,7 @@ public class Account extends BaseEntity {
     @NotNull
     @Size(max = 128)
     private String name;
+
+    @ManyToMany(mappedBy = "accounts", fetch = FetchType.LAZY)
+    private Set<Chat> chats;
 }

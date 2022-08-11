@@ -6,7 +6,7 @@ import com.dislinkt.chatapi.exception.types.EntityNotFoundException;
 import com.dislinkt.chatapi.repository.ChatRepository;
 import com.dislinkt.chatapi.service.account.AccountService;
 import com.dislinkt.chatapi.util.ReturnResponse;
-import com.dislinkt.chatapi.web.rest.account.payload.AccountDTO;
+import com.dislinkt.chatapi.service.account.payload.AccountDTO;
 import com.dislinkt.chatapi.web.rest.chat.payload.SimpleChatDTO;
 import com.dislinkt.chatapi.web.rest.chat.payload.request.NewChatRequest;
 import org.springframework.beans.factory.annotation.Autowired;

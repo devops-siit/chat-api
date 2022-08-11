@@ -6,7 +6,7 @@ import com.dislinkt.chatapi.domain.chat.message.Message;
 import com.dislinkt.chatapi.repository.MessageRepository;
 import com.dislinkt.chatapi.service.account.AccountService;
 import com.dislinkt.chatapi.service.chat.ChatService;
-import com.dislinkt.chatapi.web.rest.account.payload.AccountDTO;
+import com.dislinkt.chatapi.service.account.payload.AccountDTO;
 import com.dislinkt.chatapi.web.rest.message.payload.MessageDTO;
 import com.dislinkt.chatapi.web.rest.message.payload.request.NewMessageRequest;
 import org.springframework.beans.factory.annotation.Autowired;

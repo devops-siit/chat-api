@@ -1,4 +1,4 @@
-package com.dislinkt.chatapi.web.rest.account.payload;
+package com.dislinkt.chatapi.service.account.payload;
 
 import com.dislinkt.chatapi.web.rest.base.BaseDTO;
 import lombok.Data;

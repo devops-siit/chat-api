@@ -42,8 +42,6 @@ public class ChatService {
 
             dto.setUuid(chat.getUuid());
 
-            chat.getAccounts().remove(account);
-
             Account targetAccount = chat.getAccounts().iterator().next();
 
             AccountDTO targetAccountDTO = new AccountDTO();

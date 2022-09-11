@@ -8,9 +8,10 @@ import com.dislinkt.chatapi.service.account.AccountService;
 import com.dislinkt.chatapi.util.ReturnResponse;
 import com.dislinkt.chatapi.service.account.payload.AccountDTO;
 import com.dislinkt.chatapi.web.rest.chat.payload.SimpleChatDTO;
-import com.dislinkt.chatapi.web.rest.chat.payload.request.NewChatRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -28,9 +29,11 @@ public class ChatService {
     @Autowired
     private AccountService accountService;
 
-    public Set<SimpleChatDTO> findByAccount(String accountUuid) {
+    public Set<SimpleChatDTO> findByAccount() {
 
-        Account account = accountService.findOneByUuidOrElseThrowException(accountUuid);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Account account = accountService.findOneByUsernameOrElseThrowException(user.getUsername());
 
         Set<Chat> chats = account.getChats();
 
@@ -38,8 +41,6 @@ public class ChatService {
             SimpleChatDTO dto = new SimpleChatDTO();
 
             dto.setUuid(chat.getUuid());
-
-            chat.getAccounts().remove(account);
 
             Account targetAccount = chat.getAccounts().iterator().next();
 
@@ -54,11 +55,13 @@ public class ChatService {
         }).collect(Collectors.toSet());
     }
 
-    public ResponseEntity<SimpleChatDTO> insertChat(NewChatRequest chatRequest) {
+    public ResponseEntity<SimpleChatDTO> insertChat(String accountUuid) {
 
-        Account loggedAccount = accountService.findOneByUuidOrElseThrowException(chatRequest.getLoggedAccountUuid());
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Account account = accountService.findOneByUuidOrElseThrowException(chatRequest.getAccountUuid());
+        Account loggedAccount = accountService.findOneByUsernameOrElseThrowException(user.getUsername());
+
+        Account account = accountService.findOneByUuidOrElseThrowException(accountUuid);
 
         Optional<Chat> chatOrEmpty = chatRepository.findOneByAccountsIn(Arrays.asList(loggedAccount, account));
 

@@ -43,4 +43,13 @@ public class AccountService {
         return accountRepository.findOneByUuid(uuid).orElseThrow(() ->
                 new EntityNotFoundException("Account not found"));
     }
+
+    public Account findOneByUsernameOrElseThrowException(String username) {
+        return accountRepository.findOneByUsername(username).orElseThrow(() ->
+                new EntityNotFoundException("Account not found"));
+    }
+
+    public Optional<Account> findOneByUsername(String username) {
+        return accountRepository.findOneByUsername(username);
+    }
 }

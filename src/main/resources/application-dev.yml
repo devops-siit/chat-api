@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8084
 spring:
   datasource:
     url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/chat-db?createDatabaseIfNotExist=true
@@ -17,8 +17,6 @@ spring:
   cloud:
     stream:
       bindings:
-        accountRegistrationChannel:
+        input:
           destination: accountRegistrations
-      default:
-        contentType: application/json
-
+          group: accountRegistrationChatQueue
